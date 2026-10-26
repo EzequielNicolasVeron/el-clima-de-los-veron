@@ -2,7 +2,7 @@
   "name": "El Clima de los Verón",
   "short_name": "Clima Verón",
   "description": "El clima de la familia Verón",
-"start_url": "https://script.google.com/macros/s/AKfycbxZdaSYq3VJ3aeIcwoUvJ8YnYa57H_T3LmE_798lpvSHX0Pk9GlbWt9VST-Bf6ll7k/exec",  "scope": "./",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#dff3ff",
   "theme_color": "#1769aa",
