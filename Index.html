@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1769aa">
+  <title>El Clima de los Verón</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: #17324d;
+      background: linear-gradient(#dff3ff, #ffffff);
+    }
+    main {
+      width: min(88%, 380px);
+      padding: 24px;
+      box-sizing: border-box;
+    }
+    .icon { font-size: 64px; }
+    h1 { font-size: 27px; }
+    p { line-height: 1.5; }
+    a, button {
+      display: inline-block;
+      box-sizing: border-box;
+      width: 100%;
+      margin-top: 12px;
+      padding: 15px;
+      border: 0;
+      border-radius: 12px;
+      background: #1769aa;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    button { background: #238447; }
+    #install { display: none; }
+    #help { font-size: 14px; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="icon">🌦️</div>
+    <h1>El Clima de los Verón</h1>
+    <p>El tiempo, estés donde estés.</p>
+
+    <button id="install">Instalar aplicación</button>
+
+    <a href="https://script.google.com/macros/s/AKfycbxZdaSYq3VJ3aeIcwoUvJ8YnYa57H_T3LmE_798lpvSHX0Pk9GlbWt9VST-Bf6ll7k/exec">
+      Abrir el clima
+    </a>
+
+    <p id="help">Podés instalarla para tenerla a mano en la pantalla de inicio.</p>
+  </main>
+
+  <script>
+    let installPrompt;
+
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();
+      installPrompt = event;
+      document.getElementById('install').style.display = 'block';
+    });
+
+    document.getElementById('install').addEventListener('click', async () => {
+      if (!installPrompt) return;
+      installPrompt.prompt();
+      await installPrompt.userChoice;
+      installPrompt = null;
+      document.getElementById('install').style.display = 'none';
+    });
+  </script>
+</body>
+</html>
