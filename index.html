@@ -62,22 +62,35 @@
     <p id="help">Podés instalarla para tenerla a mano en la pantalla de inicio.</p>
   </main>
 
-  <script>
-    let installPrompt;
+ 
+<script>
+  // Si se abre desde la app instalada, ir directamente al clima.
+  const standalone =
+    window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone === true;
 
-    window.addEventListener('beforeinstallprompt', (event) => {
-      event.preventDefault();
-      installPrompt = event;
-      document.getElementById('install').style.display = 'block';
-    });
+  if (standalone) {
+    window.location.replace(
+      'https://script.google.com/macros/s/AKfycbxZdaSYq3VJ3aeIcwoUvJ8YnYa57H_T3LmE_798lpvSHX0Pk9GlbWt9VST-Bf6ll7k/exec'
+    );
+  }
 
-    document.getElementById('install').addEventListener('click', async () => {
-      if (!installPrompt) return;
-      installPrompt.prompt();
-      await installPrompt.userChoice;
-      installPrompt = null;
-      document.getElementById('install').style.display = 'none';
-    });
-  </script>
+  let installPrompt;
+
+  window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    installPrompt = event;
+    document.getElementById('install').style.display = 'block';
+  });
+
+  document.getElementById('install').addEventListener('click', async () => {
+    if (!installPrompt) return;
+    installPrompt.prompt();
+    await installPrompt.userChoice;
+    installPrompt = null;
+    document.getElementById('install').style.display = 'none';
+  });
+</script>
+
 </body>
 </html>
